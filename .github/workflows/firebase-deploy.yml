@@ -34,5 +34,6 @@ jobs:
           export GOOGLE_APPLICATION_CREDENTIALS=./service-account.json
           # Verifikasi autentikasi
           firebase projects:list --debug
+          # Deploy Functions
           firebase deploy --only functions --project wartelsuspas-app --debug --non-interactive
         working-directory: ./server
