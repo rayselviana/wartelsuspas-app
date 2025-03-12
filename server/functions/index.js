@@ -6,7 +6,7 @@ const cors = require('cors');
 const http = require('http');
 const { Server } = require('socket.io');
 
-admin.initializeApp();
+admin.initializeApp(); // Tanpa serviceAccountKey.json, otomatis pakai kredensial Functions
 const db = admin.firestore();
 
 const app = express();
@@ -130,5 +130,8 @@ io.on('connection', (socket) => {
 
 exports.api = functions.https.onRequest(app);
 exports.socket = functions.https.onRequest((req, res) => {
+  if (!res.socket.server.io) {
+    res.socket.server.io = io;
+  }
   server.emit('request', req, res);
 });
