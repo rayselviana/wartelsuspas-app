@@ -32,5 +32,7 @@ jobs:
           echo "Firebase CLI version: $(firebase --version)"
           echo '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}' > ./service-account.json
           export GOOGLE_APPLICATION_CREDENTIALS=./service-account.json
+          # Aktifkan API yang diperlukan
+          firebase functions:config:set project.id="wartelsuspas-app" --debug
           firebase deploy --only functions --project wartelsuspas-app --debug --non-interactive
         working-directory: ./server
