@@ -26,9 +26,12 @@ jobs:
           channelId: live
           projectId: wartelsuspas-app
       # Deploy Functions
-      - name: Deploy Firebase Functions
+      - name: Install Firebase Tools and Deploy Functions
         run: |
           npm install -g firebase-tools
-          echo '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}' > $HOME/service-account.json
-          firebase deploy --only functions --project wartelsuspas-full --json $HOME/service-account.json
+          echo "Firebase CLI version: $(firebase --version)"
+          echo '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}' > ./service-account.json
+          firebase deploy --only functions --project wartelsuspas-full --debug --non-interactive --service-account ./service-account.json
         working-directory: ./server
+        env:
+          GOOGLE_APPLICATION_CREDENTIALS: ./service-account.json
