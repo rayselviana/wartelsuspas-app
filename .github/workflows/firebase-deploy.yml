@@ -32,8 +32,5 @@ jobs:
           echo "Firebase CLI version: $(firebase --version)"
           echo '${{ secrets.FIREBASE_SERVICE_ACCOUNT }}' > ./service-account.json
           export GOOGLE_APPLICATION_CREDENTIALS=./service-account.json
-          # Set proyek aktif
-          firebase use --add wartelsuspas-app --service-account ./service-account.json --non-interactive
-          # Deploy Functions
           firebase deploy --only functions --project wartelsuspas-app --debug --non-interactive
         working-directory: ./server
